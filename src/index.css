@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  transition: background 0.3s ease;
+}
+
+/* --- Global UI Utilities --- */
+@layer components {
+  .dropdown-link {
+    @apply flex items-center gap-0.5 sm:gap-1 px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors;
+  }
+
+  .glow-button {
+    @apply relative inline-flex items-center justify-center rounded-full font-semibold text-white shadow-lg px-3 py-1 sm:px-4 sm:py-2 text-sm sm:text-base;
+    background: linear-gradient(270deg, #ff6ec4, #7873f5, #4ADEDE, #facc15, #ff6ec4);
+    background-size: 600% 600%;
+  }
+
+  .glow-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    filter: blur(10px);
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .glow-button > * {
+    position: relative;
+    z-index: 10;
+  }
+
+  .navbar-sticky {
+    @apply sticky top-0 z-50 shadow-sm backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-800;
+  }
+}
+
+/* --- Pulse Glow Animation --- */
+@keyframes ai-pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+.animate-ai-pulse {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.animate-ai-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(270deg, #ff6ec4, #7873f5, #4ADEDE, #facc15, #ff6ec4);
+  background-size: 600% 600%;
+  filter: blur(10px);
+  opacity: 0.35;
+  animation: ai-pulse 3s ease-in-out infinite;
+  z-index: 0;
+}
